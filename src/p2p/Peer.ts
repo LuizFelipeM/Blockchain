@@ -6,7 +6,7 @@ export class Peer {
     server: Server
     client: Socket
 
-    constructor(serverPort: number = 3000, serverOpts?: ServerOpts, clientOpts?: SocketConstructorOpts,  ) {
+    constructor(serverPort: number = 3000, serverOpts?: ServerOpts, clientOpts?: SocketConstructorOpts) {
         this.server = createServer(serverOpts, this.onSocketConnected)
         this.server.listen(serverPort, () => console.log(`Listen on port ${serverPort}`))
 
@@ -14,12 +14,7 @@ export class Peer {
     }
 
     private onSocketConnected(socket: Socket) {
-        this.connections.push(socket);
-        socket.on('data', this.onData);
-    }
-
-    onData(data: Buffer) {
-        console.log("received: ", data.toString())
+        this.connections.push(socket)
     }
 
     broadcast(data: any) {
